@@ -4,6 +4,9 @@ import { useRouter } from 'next/navigation';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useEffect, useState } from "react";
 import { app } from "@/config/firebase";
+import Image from "next/image";
+import cloud1 from '../../public/3d cloud.png'
+import cloud2 from '../../public/3dColud2.png'
 
 const getCurrentDate = () => {
   const currentDate = new Date();
@@ -107,7 +110,13 @@ export default function Home() {
 
   return (
     <>
-    <div className="absolute w-full flex justify-center top-14"><button className="bg-black p-2 text-white px-4 m-auto rounded-full" onClick={handleSignOut}>Sign Out</button></div>
+    <div className="relative">
+      <div className="absolute w-full flex justify-center top-14"><button className="bg-black z-10 p-2 bg-opacity-45 text-white px-4 m-auto rounded-full" onClick={handleSignOut}>Sign Out</button>
+      <Image className="absolute top-28  right-96" width={100} src={cloud1} alt=""/>
+      <Image className="absolute -top-10 " width={170} src={cloud2} alt=""/>
+      <Image className="absolute top-32 left-56 hidden md:block" width={300} src={cloud1} alt=""/>
+      </div>
+    </div>
     <div className="flex w-full justify-center bg-[#6455f0] h-screen items-center">
       {weatherData && (
         <div className="bg-gradient-to-b shadow-2xl shadow-gray-800 from-[#6472f1] flex flex-col items-center  to-[#8295db] p-4 rounded-lg h-72 w-64">
@@ -131,9 +140,9 @@ export default function Home() {
                     )}
                   </div>
                   <div className="text-xs text-center tracking-wider">
-                    <p className="text-6xl text-opacity-90 text-black ">
+                    <h1 className="text-6xl z-10 text-opacity-90 text-black ">
                       {weatherData.main && weatherData.main.temp ? (Math.round(weatherData.main.temp - 273.5) + String.fromCharCode(176)) : ""}
-                    </p>
+                    </h1>
                     <span>{weatherData.weather[0].description.toUpperCase()}</span>
                   </div>
                 </div>
